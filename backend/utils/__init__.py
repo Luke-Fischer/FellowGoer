@@ -1,1 +1,1 @@
-"""Utility modules for FellowGoer"""
+"""Utility modules for FellowGOer"""

@@ -1,4 +1,4 @@
-"""Routes package for FellowGoer API"""
+"""Routes package for FellowGOer API"""
 
 from . import auth, health
 

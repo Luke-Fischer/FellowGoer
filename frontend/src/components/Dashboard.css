@@ -1,65 +1,145 @@
 .dashboard-container {
   min-height: 100vh;
-  background: linear-gradient(200deg, #cc2f71 20%, #60226d 50%, #64748b 80%);
+  background: linear-gradient(135deg, #00ab66 0%, #008f55 100%);
   padding: 40px 20px;
 }
 
 .dashboard-card {
-  max-width: 800px;
+  max-width: 1000px;
   margin: 0 auto;
   background: white;
-  padding: 40px;
-  border-radius: 10px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  padding: 60px;
+  border-radius: 15px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  min-height: 600px;
 }
 
-.dashboard-card h1 {
-  margin: 0 0 30px 0;
+.logo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.app-logo {
+  width: 200px;
+  height: 100px;
+  margin-bottom: 15px;
+}
+
+.logo-container h1 {
+  margin: 0;
+  color: #00ab66;
+  font-size: 42px;
+  font-weight: 700;
+}
+
+.dashboard-card h2 {
+  text-align: center;
   color: #333;
-  font-size: 32px;
+  font-size: 28px;
+  margin: 0 0 30px 0;
+  font-weight: 600;
 }
 
-.user-info,
-.profile-info {
-  background: #f9f9f9;
-  padding: 20px;
-  border-radius: 8px;
-  margin-bottom: 20px;
+.description {
+  background: #f8f9fa;
+  padding: 30px;
+  border-radius: 10px;
+  margin-bottom: 40px;
+  border-left: 4px solid #00ab66;
 }
 
-.user-info h2,
-.profile-info h3 {
+.description p {
   margin: 0 0 15px 0;
-  color: #cc2f71;
-}
-
-.user-info p {
-  margin: 8px 0;
   color: #555;
+  font-size: 16px;
+  line-height: 1.6;
 }
 
-.profile-info pre {
-  background: #fff;
-  padding: 15px;
-  border-radius: 6px;
-  overflow-x: auto;
-  border: 1px solid #e1e8ed;
-  font-size: 14px;
+.description p:last-child {
+  margin-bottom: 0;
+}
+
+.action-labels {
+  display: flex;
+  gap: 25px;
+  margin-bottom: 50px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.action-label {
+  flex: 1;
+  min-width: 200px;
+  max-width: 250px;
+  padding: 30px;
+  background: white;
+  border: 3px solid #00ab66;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.action-label:hover {
+  background: #00ab66;
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 171, 102, 0.3);
+}
+
+.action-label:hover .label-text {
+  color: white;
+}
+
+.label-icon {
+  font-size: 48px;
+}
+
+.label-text {
+  font-size: 22px;
+  font-weight: 600;
+  color: #00ab66;
+  transition: color 0.3s;
+}
+
+.add-route-label {
+  border-color: #00ab66;
+}
+
+.chats-label {
+  border-color: #00ab66;
+}
+
+.connect-label {
+  border-color: #008f55;
+}
+
+.connect-label:hover {
+  background: #008f55;
+  border-color: #008f55;
 }
 
 .logout-button {
-  padding: 12px 30px;
-  background: linear-gradient(135deg, #cc2f71 0%, #60226d 100%);
-  color: white;
-  border: none;
-  border-radius: 6px;
+  padding: 14px 40px;
+  background: white;
+  color: #00ab66;
+  border: 2px solid #00ab66;
+  border-radius: 8px;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: all 0.3s;
+  display: block;
+  margin: 0 auto;
 }
 
 .logout-button:hover {
+  background: #00ab66;
+  color: white;
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(204, 47, 113, 0.4);
+  box-shadow: 0 5px 15px rgba(0, 171, 102, 0.3);
 }
