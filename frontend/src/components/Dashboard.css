@@ -1,0 +1,65 @@
+.dashboard-container {
+  min-height: 100vh;
+  background: linear-gradient(200deg, #cc2f71 20%, #60226d 50%, #64748b 80%);
+  padding: 40px 20px;
+}
+
+.dashboard-card {
+  max-width: 800px;
+  margin: 0 auto;
+  background: white;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.dashboard-card h1 {
+  margin: 0 0 30px 0;
+  color: #333;
+  font-size: 32px;
+}
+
+.user-info,
+.profile-info {
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.user-info h2,
+.profile-info h3 {
+  margin: 0 0 15px 0;
+  color: #cc2f71;
+}
+
+.user-info p {
+  margin: 8px 0;
+  color: #555;
+}
+
+.profile-info pre {
+  background: #fff;
+  padding: 15px;
+  border-radius: 6px;
+  overflow-x: auto;
+  border: 1px solid #e1e8ed;
+  font-size: 14px;
+}
+
+.logout-button {
+  padding: 12px 30px;
+  background: linear-gradient(135deg, #cc2f71 0%, #60226d 100%);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.logout-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(204, 47, 113, 0.4);
+}

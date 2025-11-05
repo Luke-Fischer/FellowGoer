@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_cors import CORS
 from config import Config
 from models import db
 from routes import auth, health
@@ -6,6 +7,9 @@ from routes import auth, health
 # Create Flask app
 app = Flask(__name__)
 app.config.from_object(Config)
+
+# Enable CORS
+CORS(app, resources={r"/api/*": {"origins": "http://localhost:3000"}})
 
 # Initialize database
 db.init_app(app)
