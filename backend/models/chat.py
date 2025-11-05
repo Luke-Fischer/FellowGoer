@@ -35,8 +35,8 @@ class Chat(db.Model):
 
         return {
             'id': self.id,
-            'created_at': self.created_at.isoformat(),
-            'updated_at': self.updated_at.isoformat(),
+            'created_at': self.created_at.isoformat() + 'Z',  # Add Z to indicate UTC
+            'updated_at': self.updated_at.isoformat() + 'Z',  # Add Z to indicate UTC
             'participants': participants_list,
             'other_participant': other_participant,
             'last_message': last_message.to_dict() if last_message else None,
@@ -71,7 +71,7 @@ class ChatParticipant(db.Model):
         return {
             'user_id': self.user_id,
             'username': self.user.username,
-            'joined_at': self.joined_at.isoformat()
+            'joined_at': self.joined_at.isoformat() + 'Z'  # Add Z to indicate UTC
         }
 
 
@@ -106,5 +106,5 @@ class Message(db.Model):
             'sender_id': self.sender_id,
             'sender_username': self.sender.username,
             'content': self.content,
-            'created_at': self.created_at.isoformat()
+            'created_at': self.created_at.isoformat() + 'Z'  # Add Z to indicate UTC
         }

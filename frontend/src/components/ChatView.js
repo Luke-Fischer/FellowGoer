@@ -103,22 +103,32 @@ function ChatView() {
     return date.toLocaleTimeString('en-US', {
       hour: 'numeric',
       minute: '2-digit',
-      hour12: true
+      hour12: true,
+      timeZone: 'America/New_York'
     });
   };
 
   const formatDate = (isoString) => {
     const date = new Date(isoString);
-    const today = new Date();
-    const yesterday = new Date(today);
-    yesterday.setDate(yesterday.getDate() - 1);
 
-    if (date.toDateString() === today.toDateString()) {
+    // Get current date in EST
+    const todayEST = new Date().toLocaleDateString('en-US', { timeZone: 'America/New_York' });
+    const yesterdayDate = new Date();
+    yesterdayDate.setDate(yesterdayDate.getDate() - 1);
+    const yesterdayEST = yesterdayDate.toLocaleDateString('en-US', { timeZone: 'America/New_York' });
+    const messageDateEST = date.toLocaleDateString('en-US', { timeZone: 'America/New_York' });
+
+    if (messageDateEST === todayEST) {
       return 'Today';
-    } else if (date.toDateString() === yesterday.toDateString()) {
+    } else if (messageDateEST === yesterdayEST) {
       return 'Yesterday';
     } else {
-      return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+      return date.toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
+        timeZone: 'America/New_York'
+      });
     }
   };
 
