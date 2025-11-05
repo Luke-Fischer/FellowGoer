@@ -1,6 +1,7 @@
 from flask import request, jsonify
 from models import db
 from models.user import User
+from utils.auth import generate_token, token_required
 
 
 def register_routes(app):
@@ -27,14 +28,19 @@ def register_routes(app):
             if User.query.filter_by(email=email).first():
                 return jsonify({'error': 'Email already exists'}), 409
 
-            # Create new user (storing password as plain text for now)
-            new_user = User(username=username, email=email, password=password)
+            # Create new user with hashed password
+            new_user = User(username=username, email=email)
+            new_user.set_password(password)
             db.session.add(new_user)
             db.session.commit()
 
+            # Generate JWT token
+            token = generate_token(new_user.id, app.config['SECRET_KEY'])
+
             return jsonify({
                 'message': 'User created successfully',
-                'user': new_user.to_dict()
+                'user': new_user.to_dict(),
+                'token': token
             }), 201
 
         except Exception as e:
@@ -58,14 +64,35 @@ def register_routes(app):
             user = User.query.filter_by(username=username).first()
 
             if not user:
-                return jsonify({'error': 'User does not exist'}), 401
-
-            # Check password (plain text comparison for now)
-            if user.password != password:
                 return jsonify({'error': 'Invalid credentials'}), 401
+
+            # Check password using bcrypt
+            if not user.check_password(password):
+                return jsonify({'error': 'Invalid credentials'}), 401
+
+            # Generate JWT token
+            token = generate_token(user.id, app.config['SECRET_KEY'])
 
             return jsonify({
                 'message': 'Login successful',
+                'user': user.to_dict(),
+                'token': token
+            }), 200
+
+        except Exception as e:
+            return jsonify({'error': str(e)}), 500
+
+    @app.route('/api/profile', methods=['GET'])
+    @token_required
+    def get_profile(user_id):
+        """Get user profile (protected route example)"""
+        try:
+            user = User.query.get(user_id)
+
+            if not user:
+                return jsonify({'error': 'User not found'}), 404
+
+            return jsonify({
                 'user': user.to_dict()
             }), 200
 
