@@ -1,5 +1,7 @@
 from flask import jsonify, request
+from sqlalchemy import and_, func
 from models import db
+from models.user import User
 from models.transit import Route
 from models.user_route import UserRoute
 from utils.auth import token_required
@@ -91,4 +93,59 @@ def register_routes(app):
 
         except Exception as e:
             db.session.rollback()
+            return jsonify({'error': str(e)}), 500
+
+    @app.route('/api/connect/users', methods=['GET'])
+    @token_required
+    def get_matching_users(user_id):
+        """Get users who share at least one route with the current user"""
+        try:
+            # Get the current user's route IDs
+            user_route_ids = db.session.query(UserRoute.route_id).filter_by(user_id=user_id).all()
+            user_route_ids = [r[0] for r in user_route_ids]
+
+            if not user_route_ids:
+                return jsonify({'users': []}), 200
+
+            # Find other users who have at least one matching route
+            matching_users = db.session.query(
+                User.id,
+                User.username,
+                User.email,
+                func.count(UserRoute.route_id).label('shared_routes_count')
+            ).join(
+                UserRoute, UserRoute.user_id == User.id
+            ).filter(
+                and_(
+                    User.id != user_id,  # Exclude current user
+                    UserRoute.route_id.in_(user_route_ids)  # Match routes
+                )
+            ).group_by(
+                User.id, User.username, User.email
+            ).all()
+
+            # Get detailed information for each matching user
+            result = []
+            for match in matching_users:
+                # Get the shared routes
+                shared_routes = db.session.query(Route).join(
+                    UserRoute, UserRoute.route_id == Route.route_id
+                ).filter(
+                    and_(
+                        UserRoute.user_id == match.id,
+                        UserRoute.route_id.in_(user_route_ids)
+                    )
+                ).all()
+
+                result.append({
+                    'id': match.id,
+                    'username': match.username,
+                    'email': match.email,
+                    'shared_routes_count': match.shared_routes_count,
+                    'shared_routes': [route.to_dict() for route in shared_routes]
+                })
+
+            return jsonify({'users': result}), 200
+
+        except Exception as e:
             return jsonify({'error': str(e)}), 500

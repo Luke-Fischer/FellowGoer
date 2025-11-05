@@ -4,6 +4,7 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import Dashboard from './components/Dashboard';
 import UserRoutes from './components/UserRoutes';
+import Connect from './components/Connect';
 import ProtectedRoute from './components/ProtectedRoute';
 import authService from './services/authService';
 import './App.css';
@@ -41,6 +42,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <UserRoutes />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/connect"
+            element={
+              <ProtectedRoute>
+                <Connect />
               </ProtectedRoute>
             }
           />

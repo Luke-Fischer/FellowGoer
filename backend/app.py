@@ -2,7 +2,7 @@ from flask import Flask
 from flask_cors import CORS
 from config import Config
 from models import db
-from routes import auth, health
+from routes import auth, health, routes
 
 # Create Flask app
 app = Flask(__name__)
@@ -21,6 +21,7 @@ with app.app_context():
 # Register routes
 auth.register_routes(app)
 health.register_routes(app)
+routes.register_routes(app)
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)

@@ -23,8 +23,7 @@ function Dashboard() {
   };
 
   const handleConnect = () => {
-    // TODO: Implement connect functionality
-    console.log('Connect clicked');
+    navigate('/connect');
   };
 
   const handleAddRoute = () => {
