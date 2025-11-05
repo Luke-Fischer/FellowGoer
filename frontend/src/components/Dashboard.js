@@ -28,8 +28,7 @@ function Dashboard() {
   };
 
   const handleAddRoute = () => {
-    // TODO: Implement add route functionality
-    console.log('Add Route clicked');
+    navigate('/routes');
   };
 
   return (
