@@ -5,6 +5,8 @@ import Signup from './components/Signup';
 import Dashboard from './components/Dashboard';
 import UserRoutes from './components/UserRoutes';
 import Connect from './components/Connect';
+import Chats from './components/Chats';
+import ChatView from './components/ChatView';
 import ProtectedRoute from './components/ProtectedRoute';
 import authService from './services/authService';
 import './App.css';
@@ -50,6 +52,22 @@ function App() {
             element={
               <ProtectedRoute>
                 <Connect />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/chats"
+            element={
+              <ProtectedRoute>
+                <Chats />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/chats/:chatId"
+            element={
+              <ProtectedRoute>
+                <ChatView />
               </ProtectedRoute>
             }
           />

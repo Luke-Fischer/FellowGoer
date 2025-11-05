@@ -40,6 +40,31 @@ function Connect() {
     navigate('/dashboard');
   };
 
+  const handleSendMessage = async (userId) => {
+    try {
+      const token = authService.getToken();
+
+      const response = await fetch('http://localhost:5000/api/chats', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ other_user_id: userId })
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to create chat');
+      }
+
+      const data = await response.json();
+      navigate(`/chats/${data.chat.id}`);
+    } catch (err) {
+      setError(err.message);
+      console.error('Error creating chat:', err);
+    }
+  };
+
   if (loading) {
     return (
       <div className="connect-container">
@@ -122,7 +147,10 @@ function Connect() {
                   </div>
 
                   <div className="user-actions">
-                    <button className="message-button">
+                    <button
+                      className="message-button"
+                      onClick={() => handleSendMessage(user.id)}
+                    >
                       Send Message
                     </button>
                   </div>

@@ -18,8 +18,7 @@ function Dashboard() {
   };
 
   const handleChats = () => {
-    // TODO: Implement chats functionality
-    console.log('Chats clicked');
+    navigate('/chats');
   };
 
   const handleConnect = () => {
