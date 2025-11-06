@@ -168,19 +168,15 @@ def main():
         if existing_routes > 0:
             print(f"[INFO] Database already contains {existing_routes} routes.")
             print("Clearing existing data...")
-            StopTime.query.delete()
             Trip.query.delete()
-            Stop.query.delete()
             Route.query.delete()
             db.session.commit()
             print("[OK] Cleared existing data\n")
 
-        # Import data
+        # Import data (only routes and trips)
         try:
             import_routes(data_dir)
-            import_stops(data_dir)
             import_trips(data_dir)
-            import_stop_times(data_dir)
 
             print("\n" + "="*60)
             print("[SUCCESS] Import completed successfully!")
@@ -189,9 +185,7 @@ def main():
             # Show summary
             print("Database summary:")
             print(f"  Routes: {Route.query.count()}")
-            print(f"  Stops: {Stop.query.count()}")
             print(f"  Trips: {Trip.query.count()}")
-            print(f"  Stop Times: {StopTime.query.count()}")
             print()
 
         except Exception as e:
