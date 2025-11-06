@@ -1,13 +1,13 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import Login from './components/Login';
-import Signup from './components/Signup';
-import Dashboard from './components/Dashboard';
-import UserRoutes from './components/UserRoutes';
-import Connect from './components/Connect';
-import Chats from './components/Chats';
-import ChatView from './components/ChatView';
-import ProtectedRoute from './components/ProtectedRoute';
+import Login from './components/Login/Login';
+import Signup from './components/Signup/Signup';
+import Dashboard from './components/Dashboard/Dashboard';
+import UserRoutes from './components/UserRoutes/UserRoutes';
+import Connect from './components/Connect/Connect';
+import Chats from './components/Chats/Chats';
+import ChatView from './components/ChatView/ChatView';
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import authService from './services/authService';
 import './App.css';
 

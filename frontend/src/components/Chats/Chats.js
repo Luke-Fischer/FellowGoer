@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import authService from '../services/authService';
+import authService from '../../services/authService';
 import './Chats.css';
 
 function Chats() {

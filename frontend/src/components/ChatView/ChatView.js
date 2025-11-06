@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import authService from '../services/authService';
+import authService from '../../services/authService';
 import './ChatView.css';
 
 function ChatView() {
