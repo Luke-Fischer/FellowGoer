@@ -11,7 +11,14 @@ app.config.from_object(Config)
 
 # Enable CORS
 allowed_origins = os.environ.get('FRONTEND_URL', 'http://localhost:3000')
-CORS(app, resources={r"/api/*": {"origins": allowed_origins.split(',')}})
+CORS(app, resources={
+    r"/api/*": {
+        "origins": allowed_origins.split(','),
+        "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+        "allow_headers": ["Content-Type", "Authorization"],
+        "supports_credentials": False
+    }
+})
 
 # Initialize database
 db.init_app(app)
