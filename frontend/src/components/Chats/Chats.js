@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import authService from '../../services/authService';
+import { API_URL } from '../../config';
 import './Chats.css';
 
 function Chats() {
@@ -19,7 +20,7 @@ function Chats() {
       setLoading(true);
       const token = authService.getToken();
 
-      const response = await fetch('http://localhost:5000/api/chats', {
+      const response = await fetch(`${API_URL}/chats`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
 

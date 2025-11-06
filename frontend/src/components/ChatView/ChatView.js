@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import authService from '../../services/authService';
+import { API_URL } from '../../config';
 import './ChatView.css';
 
 function ChatView() {
@@ -34,10 +35,10 @@ function ChatView() {
 
       // Fetch chat info and messages in parallel
       const [chatRes, messagesRes] = await Promise.all([
-        fetch(`http://localhost:5000/api/chats/${chatId}`, {
+        fetch(`${API_URL}/chats/${chatId}`, {
           headers: { 'Authorization': `Bearer ${token}` }
         }),
-        fetch(`http://localhost:5000/api/chats/${chatId}/messages`, {
+        fetch(`${API_URL}/chats/${chatId}/messages`, {
           headers: { 'Authorization': `Bearer ${token}` }
         })
       ]);
@@ -69,7 +70,7 @@ function ChatView() {
       setSending(true);
       const token = authService.getToken();
 
-      const response = await fetch(`http://localhost:5000/api/chats/${chatId}/messages`, {
+      const response = await fetch(`${API_URL}/chats/${chatId}/messages`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

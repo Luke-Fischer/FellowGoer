@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import authService from '../../services/authService';
+import { API_URL } from '../../config';
 import './UserRoutes.css';
 
 function UserRoutes() {
@@ -22,10 +23,10 @@ function UserRoutes() {
 
       // Fetch all routes and user's routes in parallel
       const [allRoutesRes, userRoutesRes] = await Promise.all([
-        fetch('http://localhost:5000/api/routes', {
+        fetch(`${API_URL}/routes`, {
           headers: { 'Authorization': `Bearer ${token}` }
         }),
-        fetch('http://localhost:5000/api/user/routes', {
+        fetch(`${API_URL}/user/routes`, {
           headers: { 'Authorization': `Bearer ${token}` }
         })
       ]);
@@ -55,7 +56,7 @@ function UserRoutes() {
 
     try {
       const token = authService.getToken();
-      const response = await fetch('http://localhost:5000/api/user/routes', {
+      const response = await fetch(`${API_URL}/user/routes`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -82,7 +83,7 @@ function UserRoutes() {
   const handleRemoveRoute = async (userRouteId) => {
     try {
       const token = authService.getToken();
-      const response = await fetch(`http://localhost:5000/api/user/routes/${userRouteId}`, {
+      const response = await fetch(`${API_URL}/user/routes/${userRouteId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`

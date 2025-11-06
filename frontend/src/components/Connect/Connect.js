@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import authService from '../../services/authService';
+import { API_URL } from '../../config';
 import './Connect.css';
 
 function Connect() {
@@ -18,7 +19,7 @@ function Connect() {
       setLoading(true);
       const token = authService.getToken();
 
-      const response = await fetch('http://localhost:5000/api/connect/users', {
+      const response = await fetch(`${API_URL}/connect/users`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
 
@@ -44,7 +45,7 @@ function Connect() {
     try {
       const token = authService.getToken();
 
-      const response = await fetch('http://localhost:5000/api/chats', {
+      const response = await fetch(`${API_URL}/chats`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
