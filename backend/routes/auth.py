@@ -1,7 +1,7 @@
 from flask import request, jsonify
 from models import db
 from models.user import User
-from utils.auth import generate_token, token_required
+from utils.auth import generate_token
 
 
 def register_routes(app):
@@ -77,23 +77,6 @@ def register_routes(app):
                 'message': 'Login successful',
                 'user': user.to_dict(),
                 'token': token
-            }), 200
-
-        except Exception as e:
-            return jsonify({'error': str(e)}), 500
-
-    @app.route('/api/profile', methods=['GET'])
-    @token_required
-    def get_profile(user_id):
-        """Get user profile (protected route example)"""
-        try:
-            user = User.query.get(user_id)
-
-            if not user:
-                return jsonify({'error': 'User not found'}), 404
-
-            return jsonify({
-                'user': user.to_dict()
             }), 200
 
         except Exception as e:

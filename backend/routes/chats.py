@@ -1,5 +1,5 @@
 from flask import jsonify, request
-from sqlalchemy import and_, or_
+from sqlalchemy import and_
 from models import db
 from models.user import User
 from models.chat import Chat, ChatParticipant, Message

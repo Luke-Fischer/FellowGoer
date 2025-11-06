@@ -62,31 +62,6 @@ class AuthService {
   isAuthenticated() {
     return !!this.getToken();
   }
-
-  // Helper method to make authenticated requests
-  async authenticatedFetch(url, options = {}) {
-    const token = this.getToken();
-
-    return fetch(url, {
-      ...options,
-      headers: {
-        ...options.headers,
-        'Authorization': `Bearer ${token}`,
-      },
-    });
-  }
-
-  // Example: Get user profile
-  async getProfile() {
-    const response = await this.authenticatedFetch(`${API_URL}/profile`);
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(data.error || 'Failed to get profile');
-    }
-
-    return data;
-  }
 }
 
 export default new AuthService();
