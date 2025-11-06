@@ -32,6 +32,6 @@ if __name__ == '__main__':
     # Ensure data is imported
     ensure_data_imported()
 
-    # Start the Flask app with gunicorn
+    # Start the Flask app with gunicorn using exec so Render can detect the port
     port = int(os.environ.get('PORT', 5000))
-    os.system(f'gunicorn --bind 0.0.0.0:{port} app:app')
+    os.execvp('gunicorn', ['gunicorn', '--bind', f'0.0.0.0:{port}', 'app:app'])
