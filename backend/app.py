@@ -1,3 +1,4 @@
+import os
 from flask import Flask
 from flask_cors import CORS
 from config import Config
@@ -9,7 +10,8 @@ app = Flask(__name__)
 app.config.from_object(Config)
 
 # Enable CORS
-CORS(app, resources={r"/api/*": {"origins": "http://localhost:3000"}})
+allowed_origins = os.environ.get('FRONTEND_URL', 'http://localhost:3000')
+CORS(app, resources={r"/api/*": {"origins": allowed_origins.split(',')}})
 
 # Initialize database
 db.init_app(app)
